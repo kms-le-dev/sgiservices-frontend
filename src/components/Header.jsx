@@ -48,7 +48,7 @@ export default function Header() {
     <header className="header">
       <div className="header-container">
         <Link to="/" className="logo-link">
-          <img src="/src/assets/logo.jpg" alt="Logo SGI" className="logo" />
+          <img src="/assets/logo-02EcEGPo.jpg" alt="Logo SGI" className="logo" />
         </Link>
 
         <h1 className="site-title">

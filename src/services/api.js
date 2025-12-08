@@ -1,7 +1,15 @@
 import axios from "axios";
 
+const getBaseURL = () => {
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    return 'http://localhost:8000/api';
+  }
+  // Pour la production sur Netlify, adapter l'URL de votre backend
+  return 'https://votre-backend-production.com/api';
+};
+
 export const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: getBaseURL(),
   // Ne pas forcer `Content-Type` ici : laisser axios le définir automatiquement
   // (utile pour les envois `FormData` / fichiers)
 });
