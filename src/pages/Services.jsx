@@ -6,7 +6,7 @@ import { api } from "../services/api";
 import imgservices from "../assets/img01.png";
 import img03 from "../assets/imprimerie.png";
 import img04 from "../assets/divers.png";
-import "./services.css"; // <--- IMPORTANT
+import "./Services.css";
 
 export default function Services() {
   const [services, setServices] = useState([]);
