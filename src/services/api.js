@@ -4,8 +4,8 @@ const getBaseURL = () => {
   if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
     return 'http://localhost:8000/api';
   }
-  // Pour la production sur Netlify, adapter l'URL de votre backend
-  return 'https://votre-backend-production.com/api';
+  // Production backend sur Railway
+  return 'https://sgiservices-backend-production.up.railway.app/api';
 };
 
 export const api = axios.create({
