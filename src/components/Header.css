@@ -1,0 +1,355 @@
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header fixe en haut sans espace */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #32CD32;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  gap: 2rem;
+}
+
+/* Logo */
+.logo-link {
+  margin-left: -150px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+.logo {
+  display: block;
+  height: 80px;
+  width: 80px;
+  max-width: 100%;
+  object-fit: contain;
+  background: transparent;
+  border: 2px solid red;
+  box-shadow: none;
+}
+
+/* Titre du site */
+.site-title {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Title color parts */
+.site-title .title-white {
+  color: #ffffff;
+  -webkit-text-stroke: 0px transparent;
+}
+
+.site-title .title-red {
+  color: rgb(233, 7, 7);
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Espacement entre les liens principaux (Accueil, Services, Galerie, Blog) */
+.primary-links {
+  display: flex;
+  gap: 0.5rem; /* ajuster cette valeur pour modifier l'espacement */
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(201, 193, 193, 0.2);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-item:hover::before {
+  left: 0;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.295);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item.home {
+  background: rgba(233, 7, 7, 0.1);
+}
+
+.nav-item.services {
+    background: rgba(233, 7, 7, 0.1);
+}
+.nav-item.gallery {
+  background: rgba(233, 7, 7, 0.1);
+}
+.nav-item.blog {
+  background: rgba(233, 7, 7, 0.1);
+}
+.nav-item.contact {
+    background: rgba(233, 7, 7, 0.1);
+}
+.nav-item.login {
+    background: red;
+}
+.nav-item.singup {
+    background: red;
+}
+.nav-item.user-name {
+  background: greenyellow;
+  border: 5px solid black;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-item.admin {
+  background: red;
+}
+
+.nav-item.logout {
+  background: red;
+}
+
+.nav-item.home:hover {
+  color: greenyellow;
+}
+.nav-item.services:hover {
+  color: greenyellow;
+}
+.nav-item.gallery:hover {
+  color: greenyellow;
+}
+.nav-item.blog:hover {
+  color: greenyellow;
+}
+.nav-item.contact:hover {
+  color: greenyellow;
+}
+.nav-item.login:hover {
+  color: white;
+}
+.nav-item.singup:hover {
+  color: white;
+}
+.nav-item.admin:hover {
+  color: white;
+}
+
+/* Espacement pour le contenu principal */
+body {
+  padding-top: var(--header-height-desktop, 122px); /* Ajusté pour hauteur de header plus grande */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header-container {
+    padding: 0.6rem 1rem;
+    gap: 0.75rem;
+  }
+  
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  .nav-item {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  
+  .site-title {
+    display: none; /* hide large title on smaller screens */
+  }
+  
+  .logo-link {
+    display: none; /* hide logo to keep top bar minimal */
+  }
+  
+  .nav-links {
+    width: auto;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+  
+  .nav-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .logo {
+    height: 56px;
+  }
+  
+  /* Reduce header reserved space for smaller top bar */
+  body {
+    padding-top: var(--header-height-mobile, 64px);
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0.8rem 1rem;
+  }
+  
+  .site-title {
+    font-size: 1.1rem;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+  }
+  
+  .nav-item {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* On tablette et mobile: masquer les liens du header sauf Contact, user-name, admin et logout */
+@media (max-width: 1024px) {
+  .nav-links .nav-item { display: none; }
+  .nav-links .nav-item.contact,
+  .nav-links .nav-item.user-name,
+  .nav-links .nav-item.logout,
+  .nav-links .nav-item.admin { display: inline-flex; align-items: center; }
+
+  /* Make the top bar compact */
+  .header { padding: 6px 0; }
+  .header-container { padding-left: 1rem; padding-right: 1rem; }
+
+  /* Center and evenly space the visible header items on tablet/mobile */
+  .header-container { justify-content: center; }
+
+  .nav-links {
+    display: flex;
+    width: 100%;
+    max-width: 720px;
+    justify-content: center; /* center the group */
+    gap: 1rem; /* space between items */
+    align-items: center;
+  }
+
+  .nav-links .nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* space between icon and label */
+    padding: 0.35rem 0.75rem;
+    border-radius: 10px;
+    background: transparent;
+    color: #fff;
+    min-width: auto;
+    justify-content: center;
+  }
+
+  /* Apply same gradient as Contact.form-header to Connexion and Inscription */
+  .nav-links .nav-item.login,
+  .nav-links .nav-item.singup {
+    background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
+    color: #fff;
+  }
+
+  /* Make icons vertically centered and slightly larger for touch */
+  .nav-links .nav-item svg, .nav-links .nav-item .user-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+  }
+
+  /* Give logout/admin buttons a clear look */
+  .nav-links .nav-item.logout, .nav-links .nav-item.admin, .nav-links .nav-item.contact {
+    background: rgba(233,7,7,0.12);
+    color: white;
+  }
+
+  /* Hide primary links container on tablet/mobile (we use bottom nav instead) */
+  .nav-links .primary-links {
+    display: none;
+  }
+}
+
+/* Masquer le texte du nom utilisateur sur tablette et mobile, garder l'icône */
+@media (max-width: 1024px) {
+  .nav-links .nav-item.user-name .user-name-text { display: none; }
+  .nav-links .nav-item.user-name .user-icon { width: 18px; height: 18px; }
+  .nav-links .nav-item.user-name { padding: 0.2rem 0.5rem; }
+}
+
+  /* Toast de déconnexion */
+  .logout-toast {
+    position: fixed;
+    top: 86px; /* juste sous le header */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 1200;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .logout-toast.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }

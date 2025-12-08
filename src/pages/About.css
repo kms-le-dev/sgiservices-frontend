@@ -1,0 +1,53 @@
+/* Conteneur général */
+.about-container {
+  max-width: 2000px;
+  margin-top: 80px;
+  padding: 50px 50px;
+  line-height: 1.6;
+  color: #222;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+/* Titre */
+.about-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #d60000; /* rouge élégant */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Paragraphes */
+.about-text {
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablettes */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 1.9rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+  }
+
+  .about-container {
+    padding: 16px;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.6rem;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+  }
+}
