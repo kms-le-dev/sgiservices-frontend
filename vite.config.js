@@ -11,4 +11,9 @@ export default defineConfig({
       host: '172.20.10.11',
     },
   },
+  
+   build: {
+    outDir: 'dist',
+  },
+  base: './',
 })
