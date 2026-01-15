@@ -1,0 +1,368 @@
+/* ActivitiesSection.css */
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Conteneur principal */
+.activities-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 3rem 1rem;
+}
+
+.activities-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Panel Gauche - Affiche verte */
+.left-panel {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.green-card {
+  background-color: #bef264;
+  border-radius: 1.5rem;
+  border: 4px solid #000000;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.header-black {
+  background-color: #000000;
+  color: #bef264;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.header-black h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.option-section {
+  margin-bottom: 1.5rem;
+}
+
+.option-header {
+  background-color: #bef264;
+  color: #000000;
+  border: 4px solid #dc2626;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.option-header h4 {
+  font-size: 1.125rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.option-content {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+.option-content p {
+  margin-bottom: 0.5rem;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.price-large {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: 1.125rem;
+}
+
+.price-medium {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.payment-info {
+  font-size: 0.875rem;
+}
+
+.price-highlight {
+  color: #dc2626;
+  font-weight: 900;
+}
+
+.phone-numbers {
+  background-color: #000000;
+  color: #bef264;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.phone-numbers p {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+/* Panel Central */
+.center-panel {
+  animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.main-title {
+  font-size: 3.75rem;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.main-description {
+  font-size: 1.25rem;
+  color: #1f2937;
+  line-height: 1.6;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.image-card:hover {
+  transform: scale(1.1);
+}
+
+.image-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.image-card img {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  display: block;
+}
+
+/* Panel Droit - Logo SBR */
+.right-panel {
+  animation: fadeIn 0.8s ease-out 0.4s backwards;
+}
+
+.sbr-card {
+  background-color: #bef264;
+  border-radius: 1.5rem;
+  border: 4px solid #000000;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-sbr {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 140px);
+  line-height: 1;
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.tagline {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tagline-innovation {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: 2.25rem;
+  font-style: italic;
+  transform: skewX(-6deg);
+  margin-bottom: 0.5rem;
+}
+
+.tagline-and {
+  color: #000000;
+  font-weight: 700;
+  font-size: 1.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.tagline-services {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: 2.25rem;
+  font-style: italic;
+  transform: skewX(-6deg);
+}
+
+.contact-box {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.contact-box h3 {
+  font-weight: 900;
+  font-size: 1.125rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-info {
+  font-size: 0.875rem;
+}
+
+.contact-info p {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info .label {
+  font-weight: 700;
+}
+
+.cta-button {
+  width: 100%;
+  background-color: #dc2626;
+  color: #ffffff;
+  font-weight: 900;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #b91c1c;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .activities-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 0 0.5rem;
+  }
+
+  .main-title {
+    font-size: clamp(28px, 6vw, 48px);
+  }
+
+  .logo-sbr {
+    font-size: clamp(40px, 10vw, 100px);
+  }
+
+  .images-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .activities-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .main-title {
+    font-size: clamp(22px, 7vw, 36px);
+  }
+
+  .main-description {
+    font-size: 1rem;
+  }
+
+  .header-black h3 {
+    font-size: 1rem;
+  }
+
+  .logo-sbr {
+    font-size: clamp(36px, 12vw, 80px);
+  }
+
+  .tagline-innovation,
+  .tagline-services {
+    font-size: 1.875rem;
+  }
+}
+
+/* Tablet breakpoint: two columns for images and balanced panels */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .activities-wrapper {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 1.25rem;
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image-card img {
+    height: 12rem;
+  }
+}
+
+/* Small mobile tweaks */
+@media (max-width: 480px) {
+  .image-card img {
+    height: 8rem;
+  }
+
+  .header-black h3 {
+    font-size: 0.95rem;
+  }
+
+  .phone-numbers p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}

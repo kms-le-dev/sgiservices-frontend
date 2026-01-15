@@ -1,0 +1,101 @@
+/* Animation fade-in pour le scroll dynamique */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Conteneur principal */
+.services-container {
+  margin-top: -10px;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Titre principal */
+.services-title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Boutons */
+.services-buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 900px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+}
+
+/* Zone des détails */
+.details-panel {
+  width: 100%;
+  max-width: 1800px;
+  margin: 25px auto 0;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+/* Quand ouvert */
+.details-panel.open {
+  opacity: 1;
+  transform: translateY(0px);
+  pointer-events: auto;
+}
+
+/* Carte article (ServiceDetails) */
+.service-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.service-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.service-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.service-description {
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .service-image {
+    height: 220px;
+  }
+  .services-title {
+    font-size: 1.8rem;
+  }
+  .service-card {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,144 @@
+.carousel-container {
+  /* Full-viewport width while keeping content centered visually
+     Use negative side margins so component breaks out of any centered
+     page container without changing inner layout. */
+  /* Slightly reduce width from full-bleed to leave small side gutters */
+  width: calc(100vw - 60px);
+  max-width: none;
+  /* center the reduced-width container relative to the viewport */
+  margin-left: calc(50% - (100vw - 60px)/2);
+  margin-right: calc(50% - (100vw - 60px)/2);
+  padding: 0; /* keep internal spacing handled by .carousel */
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  position: relative;
+  background: #fff;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 520px; /* augmenté légèrement la hauteur */
+  overflow: hidden;
+}
+
+.carousel-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.carousel-content {
+  text-align: center;
+  padding: 30px;
+}
+
+.carousel-content h2 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.carousel-content p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.carousel-btn {
+  padding: 12px 30px;
+  background: #09c247;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.carousel-btn:hover {
+  background: #09e753;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Buttons left/right */
+.carousel-nav {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.92);
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+.carousel-nav:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.12);
+}
+
+.carousel-nav.left {
+  left: 15px;
+}
+
+.carousel-nav.right {
+  right: 15px;
+}
+
+/* Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 0;
+}
+
+.carousel-indicators button {
+  width: 14px;
+  height: 14px;
+  background: #cfcfcf;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.carousel-indicators button.active {
+  width: 40px;
+  border-radius: 8px;
+  background: #f00b44;
+}

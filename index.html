@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sgiservices (frontend)</title>
+    <style>
+      /* Overlay de chargement affiché par défaut */
+      #loading-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.95);
+        z-index: 9999;
+        transition: opacity 300ms ease;
+      }
+      #loading-overlay img {
+        max-width: 160px;
+        width: 20%;
+        height: auto;
+        display: block;
+      }
+      /* Fallback spinner si le GIF n'est pas disponible */
+      .spinner {
+        width: 64px;
+        height: 64px;
+        border: 8px solid rgba(0,0,0,0.1);
+        border-top-color: #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <div id="loading-overlay">
+      <img id="loading-gif" src="/loading.gif" alt="Chargement..." />
+    </div>
+    <div id="root"></div>
+    <script>
+      // Si l'image du GIF échoue, afficher un spinner CSS en fallback
+      (function () {
+        var overlay = document.getElementById('loading-overlay');
+        var img = document.getElementById('loading-gif');
+        function showSpinnerFallback() {
+          if (!overlay) return;
+          overlay.innerHTML = '<div class="spinner" aria-hidden="true"></div>';
+        }
+        if (img) {
+          // si l'image échoue à charger
+          img.addEventListener('error', function () { showSpinnerFallback(); });
+          // si l'image ne se charge pas rapidement, on vérifie si elle a une taille
+          setTimeout(function () {
+            if (img && !img.complete) showSpinnerFallback();
+          }, 500);
+        } else {
+          showSpinnerFallback();
+        }
+
+        // Masque l'overlay quand la page et toutes les ressources sont chargées
+        window.addEventListener('load', function () {
+          if (!overlay) return;
+          overlay.style.opacity = '0';
+          setTimeout(function () { if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 350);
+        });
+      })();
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

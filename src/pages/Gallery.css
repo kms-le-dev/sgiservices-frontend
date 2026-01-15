@@ -1,0 +1,111 @@
+/* Animation fade-in pour le scroll dynamique */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Conteneur principal */
+.gallery-container {
+  margin-top: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Titre */
+.gallery-title {
+    margin-top: 50px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Grille responsive */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+/* reuse .articles-grid/.article-card/.article-image from ServiceDetails.css */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  place-items: center;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 500px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    place-items: center;
+    margin: 0 auto;
+  }
+  .article-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+  }
+  .article-image {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    padding: 0 16px;
+    place-items: center;
+    margin: 0 auto;
+  }
+  .article-card {
+    width: 100%;
+    max-width: 300px;
+    padding: 14px;
+  }
+  .article-image {
+    width: 100%;
+    height: auto;
+    max-height: 360px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .articles-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+    place-items: center;
+    margin: 0 auto;
+  }
+  .article-card { width: 100%; max-width: 280px; }
+}
+
+@media (min-width: 1024px) {
+  .articles-grid {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1600px;
+    place-items: center;
+    margin: 0 auto;
+  }
+  .article-card { width: 100%; max-width: 320px; }
+}

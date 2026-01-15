@@ -1,0 +1,142 @@
+/* ===========================================
+   RESET & BASE
+   =========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* active smooth native scrolling for anchors and JS scrolls */
+  scroll-behavior: smooth;
+}
+
+:root {
+  --header-height-desktop: 122px;
+  --header-height-tablet: 80px;
+  --header-height-mobile: 64px;
+  --bottom-nav-height: 86px; /* includes safe area */
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===========================================
+   LAYOUT CONTAINER
+   =========================================== */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Container principal du layout (si besoin) */
+body > #root,
+body > #root > .container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===========================================
+   MAIN CONTENT
+   =========================================== */
+main {
+  width: 100%;
+  min-height: calc(100vh - var(--header-height-desktop) - 200px);
+  padding: 1.5rem 0;
+}
+
+/* Assurer que le main n'a pas de padding horizontal en double */
+main > .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Classe utilitaire flex si nécessaire */
+.flex-1 {
+  flex: 1;
+}
+
+/* Padding utilitaire */
+.p-6 {
+  padding: 1.5rem;
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  main {
+    padding: 1.25rem 0;
+    padding-bottom: var(--bottom-nav-height);
+    min-height: calc(100vh - var(--header-height-tablet) - 120px);
+  }
+}
+
+/* Mobile (Large) */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  main {
+    padding: 1rem 0;
+    padding-bottom: var(--bottom-nav-height);
+  }
+  
+  .p-6 {
+    padding: 1rem;
+  }
+}
+
+/* Mobile (Small) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  main {
+    padding: 0.75rem 0;
+    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+  }
+  
+  .p-6 {
+    padding: 0.75rem;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1800px;
+  }
+}
+
+/* When using anchor links, give some margin to avoid hidden content under a fixed header */
+:target {
+  scroll-margin-top: 80px;
+}
