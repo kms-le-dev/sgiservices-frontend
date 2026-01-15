@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import './Header.css';
 import { api } from "../services/api";
 import auth from "../services/auth";
+import logo from "../assets/logo.jpg";
 
 export default function Header() {
   const [user, setUser] = useState(null);
@@ -53,7 +54,7 @@ export default function Header() {
     <header className="header">
       <div className="header-container">
         <Link to="/" className="logo-link">
-          <img src="/src/assets/logo.jpg" alt="Logo SGI" className="logo" />
+          <img src={logo} alt="Logo SGI" className="logo" />
         </Link>
 
         <h1 className="site-title">
