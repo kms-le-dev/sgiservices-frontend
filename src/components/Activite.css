@@ -17,6 +17,7 @@
   min-height: 100vh;
   background-color: #ffffff;
   padding: 3rem 1rem;
+  color-scheme: light !important;
 }
 
 .activities-wrapper {
@@ -48,6 +49,7 @@
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-radius: 0.75rem;
+  color-scheme: light;
 }
 
 .header-black h3 {
@@ -68,6 +70,7 @@
   border-radius: 0.75rem;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  color-scheme: light;
 }
 
 .option-header h4 {
@@ -84,6 +87,8 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  color: #000000;
+  color-scheme: light;
 }
 
 .option-content p {
@@ -148,6 +153,7 @@
   font-weight: 900;
   color: #000000;
   margin-bottom: 1.5rem;
+  color-scheme: light;
 }
 
 .main-description {
@@ -155,6 +161,7 @@
   color: #1f2937;
   line-height: 1.6;
   max-width: 42rem;
+  color-scheme: light;
   margin: 0 auto 2rem;
 }
 
