@@ -1,5 +1,11 @@
 /* ActivitiesSection.css */
 
+/* Force les couleurs du texte indépendamment du mode dark */
+.activities-container,
+.activities-container * {
+  color-scheme: light;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -17,6 +23,7 @@
   min-height: 100vh;
   background-color: #ffffff;
   padding: 3rem 1rem;
+  color: #1f2937 !important;
 }
 
 .activities-wrapper {
@@ -43,7 +50,7 @@
 
 .header-black {
   background-color: #000000;
-  color: #bef264;
+  color: #bef264 !important;
   text-align: center;
   padding: 1rem;
   margin-bottom: 1.5rem;
@@ -55,6 +62,7 @@
   font-weight: 900;
   line-height: 1.3;
   margin: 0;
+  color: #bef264 !important;
 }
 
 .option-section {
@@ -62,8 +70,7 @@
 }
 
 .option-header {
-  background-color: #bef264;
-  color: #000000;
+  background-col !important;
   border: 4px solid #dc2626;
   border-radius: 0.75rem;
   padding: 1rem;
@@ -74,6 +81,8 @@
   font-size: 1.125rem;
   font-weight: 900;
   margin: 0;
+  color: #000000 !importantht: 900;
+  margin: 0;
 }
 
 .option-content {
@@ -81,45 +90,57 @@
   border-radius: 0.75rem;
   padding: 1rem;
   font-size: 0.875rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: #1f2937 !important;
 }
 
 .option-content p {
   margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.5;
+  color: #1f2937 !importantk-word;
+  line-height: 1.5;
 }
-
-.bold-text {
-  font-weight: 700;
+  color: #000000 !important;
 }
 
 .price-large {
-  color: #dc2626;
+  color: #dc2626 !important;
   font-weight: 900;
   font-size: 1.125rem;
 }
 
 .price-medium {
-  color: #dc2626;
+  color: #dc2626 !important;
   font-weight: 900;
   font-size: 1rem;
 }
 
 .payment-info {
   font-size: 0.875rem;
+  color: #1f2937 !important;
 }
 
 .price-highlight {
-  color: #dc2626;
-  font-weight: 900;
-}
+  color: #dc2626 !important
 
-.phone-numbers {
-  background-color: #000000;
-  color: #bef264;
+.price-highlight {
+  color: #dc2626;
+  font-weight: 9 !important;
   border-radius: 0.75rem;
   padding: 1rem;
   text-align: center;
   margin-top: 1.5rem;
 }
+
+.phone-numbers p {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0;
+  color: #bef264 !important
 
 .phone-numbers p {
   font-size: 1.25rem;
@@ -133,13 +154,13 @@
 }
 
 .center-content {
-  text-align: center;
+  text-align: ce !important;
+  margin-bottom: 1.5rem;
 }
 
-.main-title {
-  font-size: 3.75rem;
-  font-weight: 900;
-  color: #000000;
+.main-description {
+  font-size: 1.25rem;
+  color: #1f2937 !important;
   margin-bottom: 1.5rem;
 }
 
@@ -241,22 +262,24 @@
   padding: 1.5rem;
   width: 100%;
   margin-bottom: 1.5rem;
-}
-
-.contact-box h3 {
-  font-weight: 900;
-  font-size: 1.125rem;
-  color: #000000;
+} !important;
   margin-bottom: 1rem;
   text-align: center;
 }
 
 .contact-info {
   font-size: 0.875rem;
+  color: #1f2937 !important;
 }
 
 .contact-info p {
-  color: #1f2937;
+  color: #1f2937 !important;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info .label {
+  font-weight: 700;
+  color: #000000 !important
   margin-bottom: 0.5rem;
 }
 
@@ -291,6 +314,18 @@
     padding: 0 0.5rem;
   }
 
+  .order-1 {
+    order: 1;
+  }
+
+  .order-2 {
+    order: 2;
+  }
+
+  .order-3 {
+    order: 3;
+  }
+
   .main-title {
     font-size: clamp(28px, 6vw, 48px);
   }
@@ -306,7 +341,7 @@
 
 @media (max-width: 768px) {
   .activities-container {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.75rem;
   }
 
   .main-title {
@@ -319,6 +354,8 @@
 
   .header-black h3 {
     font-size: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .logo-sbr {
@@ -329,13 +366,31 @@
   .tagline-services {
     font-size: 1.875rem;
   }
-}
 
-/* Tablet breakpoint: two columns for images and balanced panels */
-@media (max-width: 1200px) and (min-width: 769px) {
-  .activities-wrapper {
-    grid-template-columns: 1fr 1.6fr;
-    gap: 1.25rem;
+  .green-card {
+    padding: 1rem;
+  }
+
+  .option-content {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .option-content p {
+    margin-bottom: 0.4rem;
+  }
+
+  .option-header h4 {
+    font-size: 1rem;
+  }
+
+  .price-large,
+  .price-medium {
+    font-size: 0.95rem;
+  }
+
+  .sbr-card {
+    padding: 1.5rem 1rem;
   }
 
   .images-grid {
@@ -345,24 +400,66 @@
   .image-card img {
     height: 12rem;
   }
+
+  .contact-info {
+    font-size: 0.75rem;
+  }
 }
 
 /* Small mobile tweaks */
 @media (max-width: 480px) {
+  .activities-container {
+    padding: 1rem 0.5rem;
+  }
+
   .image-card img {
     height: 8rem;
   }
 
   .header-black h3 {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .option-content {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .option-content p {
+    margin-bottom: 0.3rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .bold-text {
+    font-size: 0.8rem;
+  }
+
+  .price-large,
+  .price-medium {
+    font-size: 0.85rem;
   }
 
   .phone-numbers p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .cta-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .contact-box {
+    padding: 1rem;
+  }
+
+  .contact-box h3 {
     font-size: 1rem;
-    padding: 0.75rem 1rem;
+  }
+
+  .contact-info {
+    font-size: 0.75rem;
   }
 }
