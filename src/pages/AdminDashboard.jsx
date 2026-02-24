@@ -468,7 +468,7 @@ export default function AdminDashboard() {
 
         <main className="fade-in">
           {tab === 'users' && <UsersView />}
-          {tab === 'services' && <ItemsListView type="Services" endpoint="/services" categories={["Immobilier", "Imprimerie", "Fourniture Informatique", "Divers"]} />}
+          {tab === 'services' && <ItemsListView type="Services" endpoint="/services" categories={["BTP & Immobilier", "Imprimerie", "Import - Export", "Fourniture Informatique", "Divers"]} />}
           {tab === 'gallery' && <ItemsListView type="Galerie" endpoint="/media" />}
           {tab === 'blog' && <ItemsListView type="Blog" endpoint="/blogs" />}
         </main>

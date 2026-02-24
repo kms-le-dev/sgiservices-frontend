@@ -1,0 +1,126 @@
+/* Desktop : image à gauche, texte à droite */
+.card.card-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+
+@media (max-width: 700px) {
+  .card.card-flex {
+    flex-direction: column;
+    gap: 0;
+    padding: 10px;
+    max-width: 100%;
+  }
+  .card-header {
+    flex: 0 0 auto;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .card-header img {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+    border-radius: 8px;
+    margin: auto;
+  }
+  .card-content {
+    flex: 1 1 0%;
+    padding: 0;
+  }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header img {
+  flex: 0 0 180px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.card-title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.card-title h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+}
+
+.card-content {
+  flex: 1 1 0%;
+}
+
+.section {
+  margin-bottom: 18px;
+}
+
+.section h2 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  margin: 0 0 6px;
+  color: #555;
+}
+
+ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+
+li {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.formats span {
+  background: #f2f2f2;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* ✅ Responsive */
+
+@media (max-width: 600px) {
+  .card {
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .card-title h1 {
+    font-size: 1.4rem;
+  }
+
+  .section h2 {
+    font-size: 0.95rem;
+  }
+
+  li,
+  .subtitle {
+    font-size: 0.85rem;
+  }
+}

@@ -55,10 +55,12 @@ export default function Gallery() {
                 <img 
                   src={m.url} 
                   alt={m.title} 
-                  className="article-image" 
+                  className="article-image hover-zoom" 
                   loading="lazy" 
                   decoding="async"
                   fetchPriority={idx < 5 ? "high" : "low"}
+                  style={{cursor:'zoom-in'}}
+                  onClick={() => setLightboxImage(m.url)}
                 />
               )}
             </div>

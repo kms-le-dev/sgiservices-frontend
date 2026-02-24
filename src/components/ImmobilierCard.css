@@ -1,0 +1,123 @@
+.immo-card {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 950px;
+  margin: auto;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: stretch;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: immoFadeIn 0.7s cubic-bezier(.5,.8,.5,1.2) forwards;
+}
+
+/* Animation fade-in/slide-up */
+@keyframes immoFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* IMAGE */
+.immo-image {
+  flex: 0 0 35%;
+  display: flex;
+}
+
+.immo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* CONTENT */
+.immo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TITLE */
+.immo-title {
+  background: #ef3b3b; /* rouge style flyer */
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.immo-title h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: white;
+}
+
+/* TEXT */
+.section {
+  margin-bottom: 14px;
+}
+
+.section h2 {
+  font-size: 1rem;
+  margin: 0 0 4px;
+}
+
+ul {
+  margin: 4px 0;
+  padding-left: 18px;
+}
+
+li {
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+/* ✅ RESPONSIVE */
+@media (max-width: 768px) {
+  .immo-card {
+    flex-direction: row; /* IMPORTANT → jamais colonne */
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .immo-image {
+    flex: 0 0 40%;
+  }
+
+  .immo-title h1 {
+    font-size: 1.3rem;
+  }
+
+  .section h2 {
+    font-size: 0.9rem;
+  }
+
+  li {
+    font-size: 0.8rem;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+  .immo-image {
+    flex: 0 0 45%;
+  }
+
+  .immo-title {
+    padding: 6px;
+  }
+
+  .immo-title h1 {
+    font-size: 1.05rem;
+  }
+}

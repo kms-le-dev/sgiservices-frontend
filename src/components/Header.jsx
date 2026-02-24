@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import './Header.css';
 import { api } from "../services/api";
 import auth from "../services/auth";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.jpeg";
 
 export default function Header() {
   const [user, setUser] = useState(null);
@@ -58,8 +58,9 @@ export default function Header() {
         </Link>
 
         <h1 className="site-title">
-          <span className="title-white">S G I</span>
-          <span className="title-red"> S E R V I C E S</span>
+          <span className="title-white">S I P</span>
+          <span className="title-black"> - </span>
+          <span className="title-red"> C I</span>
           <span className="title-white"> . C O M</span>
         </h1>
 

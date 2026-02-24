@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/logo.jpeg';
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="footer-logo">
             <img src={logo} alt="Logo SGISERVICES" className="logo-icon" />
             <div className="brand">
-              <h3>SGISERVICES</h3>
+              <h3>SGIP-CI</h3>
               <p className="tag">Solutions & services digitaux</p>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-copyright">
-        <p>SGISERVICES © {new Date().getFullYear()}. Tous droits réservés.</p>
+        <p>SIP-CI © {new Date().getFullYear()}. Tous droits réservés.</p>
       </div>
     </footer>
   );

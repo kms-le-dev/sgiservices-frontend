@@ -45,13 +45,14 @@ export default function Home() {
 
           {/* Texte */}
           <div className="hero-content">
-            <p className="hero-subtitle">Bienvenue à SGI SERVICES</p>
+            <p className="hero-subtitle">Bienvenue à la SOCIÉTÉ INTERNATIONALE PLURISECTORIELLE DE CÔTE D'IVOIRE</p>
 
             <h1 className="hero-title">
               Votre partenaire de confiance pour vos projets{" "}
               <span className="text-blue">Immobilier</span>,{" "}
               <span className="text-blue">Imprimerie</span>,{" "}
-              <span className="text-blue">Fourniture informatique</span> et{" "}
+              <span className="text-blue">Import - Export</span> et{" "}
+              <span className="text-blue">Fourniture Informatique</span> et{" "}
               <span className="text-blue">Divers</span>.
             </h1>
 

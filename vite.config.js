@@ -10,5 +10,9 @@ export default defineConfig({
     hmr: {
       host: '172.20.10.11',
     },
+    proxy: {
+      '/api': 'http://localhost:8000',
+      '/storage': 'http://localhost:8000',
+    },
   },
 })

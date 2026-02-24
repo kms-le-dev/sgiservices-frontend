@@ -34,10 +34,14 @@
   gap: 20px;
 }
 /* reuse .articles-grid/.article-card/.article-image from ServiceDetails.css */
+/* Centrage horizontal des images dans la galerie */
 .articles-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+  width: 100%;
+}
   place-items: center;
   width: 100%;
   max-width: 1600px;
