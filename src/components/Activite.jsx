@@ -107,7 +107,7 @@ export default function ActivitiesSection() {
             </div>
             {/* Texte Innovation & Services */}
             <div className="tagline">
-              <div className="tagline-services"> - C I </div>
+              <div className="tagline-services"> C I </div>
             </div>
             {/* Informations de contact */}
             <div className="contact-box">

@@ -59,7 +59,6 @@ export default function Header() {
 
         <h1 className="site-title">
           <span className="title-white">S I P</span>
-          <span className="title-black"> - </span>
           <span className="title-red"> C I</span>
           <span className="title-white"> . C O M</span>
         </h1>

@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="footer-logo">
             <img src={logo} alt="Logo SGISERVICES" className="logo-icon" />
             <div className="brand">
-              <h3>SGIP-CI</h3>
+              <h3>SIP-CI</h3>
               <p className="tag">Solutions & services digitaux</p>
             </div>
           </div>

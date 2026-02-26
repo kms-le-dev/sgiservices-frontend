@@ -3,6 +3,7 @@ import './Home.css';
 import terrainImg from '../assets/terrain.jpg';
 import Carousel from '../components/Carousel';
 import Activite from '../components/Activite';
+import NosServices from '../components/NosServices'; 
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -57,7 +58,7 @@ export default function Home() {
             </h1>
 
             <p className="hero-description">
-              SGI SERVICES est une entreprise spécialisée dans la gestion,
+              SIP-CI est une entreprise spécialisée dans la gestion,
               l’achat, la vente et la location immobilière. Nous accompagnons
               particuliers, entreprises et investisseurs grâce à une expertise
               solide du marché local et une approche centrée sur la transparence
@@ -86,6 +87,7 @@ export default function Home() {
       </section>
       <section className="fade-in"><Carousel/></section><br/>
       <section className="fade-in"><Activite/></section>
+      <section className="fade-in"><NosServices/></section>
 
     </div>
   );
