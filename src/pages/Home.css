@@ -1,3 +1,6 @@
+html, body {
+  background: #fff !important;
+}
 /* Animation fade-in pour le scroll dynamique */
 .fade-in {
   opacity: 0;

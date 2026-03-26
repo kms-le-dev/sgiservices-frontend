@@ -9,17 +9,19 @@
   font-family: Arial, sans-serif;
 }
 
+
 .service-title {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #18181a;
 }
 
 .service-description {
   text-align: center;
   font-size: 1rem;
-  color: #555;
+  color: #232324;
   margin-bottom: 20px;
 }
 
@@ -104,11 +106,12 @@
 .article-title {
   font-size: 1.2rem;
   margin-bottom: 6px;
+  color: #18181a;
 }
 
 .article-desc {
   font-size: 0.95rem;
-  color: #555;
+  color: #232324;
   margin-bottom: 12px;
 }
 

@@ -52,7 +52,7 @@ export default function Home() {
               Votre partenaire de confiance pour vos projets{" "}
               <span className="text-blue">Immobilier</span>,{" "}
               <span className="text-blue">Imprimerie</span>,{" "}
-              <span className="text-blue">Import - Export</span> et{" "}
+              <span className="text-blue">Import - Export</span>,{" "}
               <span className="text-blue">Fourniture Informatique</span> et{" "}
               <span className="text-blue">Divers</span>.
             </h1>

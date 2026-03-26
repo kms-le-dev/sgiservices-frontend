@@ -50,6 +50,15 @@
   margin: 0;
   font-size: 1.6rem;
   letter-spacing: 1px;
+  color: #18181a;
+}
+
+.btp-content, .btp-content * {
+  color: #18181a !important;
+}
+
+.btp-title {
+  color: #fff !important;
 }
 
 /* TEXT */

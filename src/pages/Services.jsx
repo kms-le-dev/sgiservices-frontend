@@ -149,9 +149,6 @@ export default function Services() {
         <p>Nos services</p>
       </ImgCarServices>
 
-
-
-
       <div className="services-buttons fade-in">
         {categories.map((c, idx) => (
           <ServiceButton
@@ -159,6 +156,13 @@ export default function Services() {
             title={c}
             active={activeIndex === idx}
             onClick={() => toggle(idx)}
+            id={
+              c === "Import - Export" ? "btn-import-export" :
+              c === "Fourniture Informatique" ? "btn-fourniture-informatique" :
+              c === "Imprimerie" ? "btn-imprimerie" :
+              c === "BTP & Immobilier" ? "btn-btp-immobilier" :
+              c === "Divers" ? "btn-divers" : undefined
+            }
           />
         ))}
       </div>
