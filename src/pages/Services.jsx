@@ -77,7 +77,25 @@ const STATIC_SERVICES = [
 export default function Services() {
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState(FIXED_CATEGORIES);
-  const [activeIndex, setActiveIndex] = useState(2); // Imprimerie par défaut
+  // Par défaut : Imprimerie, mais on check l'ancre à l'arrivée
+  const getInitialIndex = () => {
+    if (typeof window !== 'undefined') {
+      switch (window.location.hash) {
+        case '#btn-btp-immobilier':
+          return FIXED_CATEGORIES.findIndex(c => c === 'BTP & Immobilier');
+        case '#btn-imprimerie':
+          return FIXED_CATEGORIES.findIndex(c => c === 'Imprimerie');
+        case '#btn-import-export':
+          return FIXED_CATEGORIES.findIndex(c => c === 'Import - Export');
+        case '#btn-divers':
+          return FIXED_CATEGORIES.findIndex(c => c === 'Divers');
+        default:
+          return 2; // Imprimerie par défaut
+      }
+    }
+    return 2;
+  };
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
   const containerRef = useRef(null);
 
   // Charger les services depuis l'API, sinon fallback statique
@@ -95,9 +113,29 @@ export default function Services() {
     return () => { mounted = false; };
   }, []);
 
+
+  // Si l'utilisateur change d'ancre sans recharger, on écoute le hashchange
   useEffect(() => {
-    // Scroll natif suffit; on évite l'initialisation de librairies JS pour le scroll (performances)
-    return () => {};
+    const onHashChange = () => {
+      switch (window.location.hash) {
+        case '#btn-btp-immobilier':
+          setActiveIndex(FIXED_CATEGORIES.findIndex(c => c === 'BTP & Immobilier'));
+          break;
+        case '#btn-imprimerie':
+          setActiveIndex(FIXED_CATEGORIES.findIndex(c => c === 'Imprimerie'));
+          break;
+        case '#btn-import-export':
+          setActiveIndex(FIXED_CATEGORIES.findIndex(c => c === 'Import - Export'));
+          break;
+        case '#btn-divers':
+          setActiveIndex(FIXED_CATEGORIES.findIndex(c => c === 'Divers'));
+          break;
+        default:
+          setActiveIndex(2);
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   useEffect(() => {

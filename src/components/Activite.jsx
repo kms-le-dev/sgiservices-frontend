@@ -9,7 +9,7 @@ const OFFERS = [
     location: 'Grand Abidjan — ALEPE',
     title: 'Terrain viabilisé avec ADU',
     details: [
-      '2 km du centre ville d\'Alepé',
+      "2 km du centre ville d'Alepé",
       '2 km du goudron (route Montezo–Alepé)',
       'Site décapé · Projet de tours',
     ],
@@ -17,7 +17,7 @@ const OFFERS = [
     unit: 'FCFA / m²',
     payment: 'Paiement échelonné sur 12 mois',
     tag: 'Nouveau',
-    accent: '#c9a84c',
+    color: '#0057FF',
   },
   {
     id: 'B',
@@ -25,7 +25,7 @@ const OFFERS = [
     location: 'Yamoussoukro',
     title: 'Terrain proche aéroport',
     details: [
-      '2 km de l\'aéroport de Yamoussoukro',
+      "2 km de l'aéroport de Yamoussoukro",
       'Attestation villageoise incluse',
       'Titre en cours de régularisation',
     ],
@@ -33,7 +33,7 @@ const OFFERS = [
     unit: 'FCFA',
     payment: 'Ou 1 500 000 FCFA sur 12 mois',
     tag: 'Disponible',
-    accent: '#a8c9b4',
+    color: '#00B86B',
   },
 ];
 
@@ -49,7 +49,7 @@ const IMAGES = [
 ];
 
 /* ─── Intersection hook ─── */
-function useReveal(threshold = 0.15) {
+function useReveal(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -64,39 +64,58 @@ function useReveal(threshold = 0.15) {
   return [ref, visible];
 }
 
+/* ─── Counter animation ─── */
+function useCounter(target, duration = 1200, active = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const num = parseInt(target.replace(/\D/g, ''), 10);
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const prog = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - prog, 3);
+      setCount(Math.floor(ease * num));
+      if (prog < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [active, target, duration]);
+  const prefix = target.startsWith('+') ? '+' : '';
+  return prefix + count;
+}
+
 /* ─── Offer Card ─── */
 function OfferCard({ offer, delay }) {
   const [ref, visible] = useReveal(0.1);
-  // Couleurs dynamiques :
-  // - badge : vert si "ADU", rouge si "Attestation villageoise", noir sinon
-  const badgeClass = offer.badge === 'ADU' ? 'text-vert' : offer.badge === 'Attestation villageoise' ? 'text-rouge' : 'text-noir';
-  // - titre toujours noir
-  // - tag : vert si "Nouveau", rouge si "Disponible", noir sinon
-  const tagClass = offer.tag === 'Nouveau' ? 'text-vert' : offer.tag === 'Disponible' ? 'text-rouge' : 'text-noir';
-  // - prix en noir
-  // - paiement en vert
+  const tagColor = offer.tag === 'Nouveau' ? '#0057FF' : '#00B86B';
+
   return (
     <div
       ref={ref}
       className={`ac-offer-card ${visible ? 'ac-reveal' : ''}`}
-      style={{ '--delay': `${delay}ms`, '--accent': offer.accent }}
+      style={{ '--delay': `${delay}ms`, '--card-color': offer.color }}
     >
       <div className="ac-offer-top">
-        <span className={`ac-offer-badge ${badgeClass}`}>{offer.badge}</span>
-        <span className={`ac-offer-tag ${tagClass}`}>{offer.tag}</span>
+        <span className="ac-offer-badge" style={{ color: offer.color, borderColor: offer.color + '33', background: offer.color + '10' }}>
+          {offer.badge}
+        </span>
+        <span className="ac-offer-tag" style={{ color: tagColor }}>
+          <span className="ac-tag-dot" style={{ background: tagColor }} />
+          {offer.tag}
+        </span>
       </div>
-      <div className="ac-offer-location text-noir">
+      <div className="ac-offer-location">
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-          <path d="M6 1a3.5 3.5 0 0 1 3.5 3.5C9.5 7.5 6 11 6 11S2.5 7.5 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" strokeWidth="1.2"/>
-          <circle cx="6" cy="4.5" r="1" fill="currentColor"/>
+          <path d="M6 1a3.5 3.5 0 0 1 3.5 3.5C9.5 7.5 6 11 6 11S2.5 7.5 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke={offer.color} strokeWidth="1.4"/>
+          <circle cx="6" cy="4.5" r="1" fill={offer.color}/>
         </svg>
         {offer.location}
       </div>
-      <h3 className="ac-offer-title text-noir">{offer.title}</h3>
+      <h3 className="ac-offer-title">{offer.title}</h3>
       <ul className="ac-offer-details">
         {offer.details.map((d, i) => (
-          <li key={i} className="text-noir">
-            <span className="ac-offer-dot" />
+          <li key={i}>
+            <span className="ac-offer-dot" style={{ background: offer.color }} />
             {d}
           </li>
         ))}
@@ -104,12 +123,14 @@ function OfferCard({ offer, delay }) {
       <div className="ac-offer-divider" />
       <div className="ac-offer-price-row">
         <div>
-          <div className="ac-offer-price text-noir">{offer.price} <span className="ac-offer-unit">{offer.unit}</span></div>
-          <div className="ac-offer-payment text-vert">{offer.payment}</div>
+          <div className="ac-offer-price" style={{ color: offer.color }}>
+            {offer.price} <span className="ac-offer-unit">{offer.unit}</span>
+          </div>
+          <div className="ac-offer-payment">{offer.payment}</div>
         </div>
-        <button className="ac-offer-btn">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+        <button className="ac-offer-btn" style={{ '--btn-color': offer.color }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
       </div>
@@ -121,7 +142,7 @@ function OfferCard({ offer, delay }) {
 function ContactCard() {
   const [ref, visible] = useReveal(0.1);
   return (
-    <div ref={ref} className={`ac-contact-card ${visible ? 'ac-reveal' : ''}`} style={{ '--delay': '300ms' }}>
+    <div ref={ref} className={`ac-contact-card ${visible ? 'ac-reveal' : ''}`} style={{ '--delay': '200ms' }}>
       <div className="ac-contact-logo">
         <span className="ac-logo-sip">SIP</span>
         <span className="ac-logo-ci">CI</span>
@@ -129,36 +150,40 @@ function ContactCard() {
       <p className="ac-contact-tagline">Société Internationale Plurisectorielle de Côte d'Ivoire</p>
       <div className="ac-contact-divider" />
       <div className="ac-contact-lines">
-        <div className="ac-contact-line">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M2 2h3l1.5 3-2 1.5a8 8 0 0 0 3 3L9 7.5l3 1.5v3a1 1 0 0 1-1 1C5 13 1 9 1 3a1 1 0 0 1 1-1z" stroke="currentColor" strokeWidth="1.2"/>
-          </svg>
-          <span>+225 07 59 89 03 58</span>
-        </div>
-        <div className="ac-contact-line">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M1 3h12v8H1z" stroke="currentColor" strokeWidth="1.2" rx="1"/>
-            <path d="M1 3l6 5 6-5" stroke="currentColor" strokeWidth="1.2"/>
-          </svg>
-          <span>sgiservices.com</span>
-        </div>
-        <div className="ac-contact-line">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M7 1a4 4 0 0 1 4 4c0 3.5-4 8-4 8S3 8.5 3 5a4 4 0 0 1 4-4z" stroke="currentColor" strokeWidth="1.2"/>
-            <circle cx="7" cy="5" r="1.2" fill="currentColor"/>
-          </svg>
-          <span>Abidjan, Côte d'Ivoire</span>
-        </div>
-        <div className="ac-contact-line">
-          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-            <path d="M2 2h3l1.5 3-2 1.5a8 8 0 0 0 3 3L9 7.5l3 1.5v3a1 1 0 0 1-1 1C5 13 1 9 1 3a1 1 0 0 1 1-1z" stroke="currentColor" strokeWidth="1.2"/>
-          </svg>
-          <span>05 74 93 97 37</span>
-        </div>
+        {[
+          { icon: 'phone', text: '+225 07 59 89 03 58' },
+          { icon: 'web', text: 'sgiservices.com' },
+          { icon: 'pin', text: 'Abidjan, Côte d\'Ivoire' },
+          { icon: 'phone', text: '05 74 93 97 37' },
+        ].map(({ icon, text }, i) => (
+          <div className="ac-contact-line" key={i}>
+            <span className="ac-line-icon">
+              {icon === 'phone' && (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 2h3l1.5 3-2 1.5a8 8 0 0 0 3 3L9 7.5l3 1.5v3a1 1 0 0 1-1 1C5 13 1 9 1 3a1 1 0 0 1 1-1z" stroke="currentColor" strokeWidth="1.3"/>
+                </svg>
+              )}
+              {icon === 'web' && (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 3h12v8H1z" stroke="currentColor" strokeWidth="1.3" rx="1"/>
+                  <path d="M1 3l6 5 6-5" stroke="currentColor" strokeWidth="1.3"/>
+                </svg>
+              )}
+              {icon === 'pin' && (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1a4 4 0 0 1 4 4c0 3.5-4 8-4 8S3 8.5 3 5a4 4 0 0 1 4-4z" stroke="currentColor" strokeWidth="1.3"/>
+                  <circle cx="7" cy="5" r="1.2" fill="currentColor"/>
+                </svg>
+              )}
+            </span>
+            <span>{text}</span>
+          </div>
+        ))}
       </div>
-      <button className="ac-contact-btn">Nous contacter
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      <button className="ac-contact-btn">
+        Nous contacter
+        <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </button>
       <div className="ac-contact-trust">
@@ -169,64 +194,7 @@ function ContactCard() {
   );
 }
 
-/* ─── Main Component ─── */
-export default function ActivitiesSection() {
-  const [headerRef, headerVisible] = useReveal(0.2);
-
-  return (
-    <section className="ac-root">
-
-      {/* ── Section header ── */}
-      <div ref={headerRef} className={`ac-header ${headerVisible ? 'ac-reveal' : ''}`} style={{ '--delay': '0ms' }}>
-        <div className="ac-header-line" />
-        <div className="ac-header-text">
-          <h2 className="ac-main-title">Nos Activités</h2>
-          <p className="ac-main-desc">
-            Une entreprise polyvalente offrant des solutions complètes dans plusieurs domaines d'expertise pour accompagner votre réussite.
-          </p>
-        </div>
-      </div>
-
-      {/* ── Three-column layout ── */}
-      <div className="ac-layout">
-
-        {/* Left — Offers */}
-        <div className="ac-col ac-col--left">
-          <div className="ac-col-label">
-            <span className="ac-col-dot" />
-            Offres Foncières
-          </div>
-          {OFFERS.map((o, i) => <OfferCard key={o.id} offer={o} delay={i * 150} />)}
-        </div>
-
-        {/* Center — Masonry gallery */}
-        <div className="ac-col ac-col--center">
-          <div className="ac-masonry">
-            {IMAGES.map((img, i) => (
-              <MasonryItem key={i} img={img} delay={i * 80} />
-            ))}
-          </div>
-        </div>
-
-        {/* Right — Contact */}
-        <div className="ac-col ac-col--right">
-          <div className="ac-col-label">
-            <span className="ac-col-dot" />
-            Contact Rapide
-          </div>
-          <ContactCard />
-          {/* Decorative stat */}
-          <div className="ac-side-stats">
-            <StatPill number="+15" label="Ans d'expérience" delay={400} />
-            <StatPill number="+250" label="Biens gérés" delay={520} />
-          </div>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
+/* ─── Masonry Item ─── */
 function MasonryItem({ img, delay }) {
   const [ref, visible] = useReveal(0.05);
   return (
@@ -242,12 +210,77 @@ function MasonryItem({ img, delay }) {
   );
 }
 
-function StatPill({ number, label, delay }) {
+/* ─── Stat Pill ─── */
+function StatPill({ number, label, delay, color }) {
   const [ref, visible] = useReveal(0.1);
+  const count = useCounter(number, 1400, visible);
   return (
-    <div ref={ref} className={`ac-stat-pill ${visible ? 'ac-reveal' : ''}`} style={{ '--delay': `${delay}ms` }}>
-      <span className="ac-stat-num">{number}</span>
+    <div ref={ref} className={`ac-stat-pill ${visible ? 'ac-reveal' : ''}`} style={{ '--delay': `${delay}ms`, '--pill-color': color }}>
+      <span className="ac-stat-num" style={{ color }}>{count}</span>
       <span className="ac-stat-lbl">{label}</span>
     </div>
+  );
+}
+
+/* ─── Main Component ─── */
+export default function ActivitiesSection() {
+  const [headerRef, headerVisible] = useReveal(0.15);
+
+  return (
+    <section className="ac-root">
+
+      {/* ── Header ── */}
+      <div ref={headerRef} className={`ac-header ${headerVisible ? 'ac-reveal' : ''}`} style={{ '--delay': '0ms' }}>
+        <div className="ac-header-eyebrow">
+          <span className="ac-eyebrow-line" />
+          <span className="ac-eyebrow-text">SIP-CI</span>
+          <span className="ac-eyebrow-line" />
+        </div>
+        <h2 className="ac-main-title">Nos <em>Activités</em></h2>
+        <p className="ac-main-desc">
+          Une entreprise polyvalente offrant des solutions complètes dans plusieurs domaines d'expertise pour accompagner votre réussite.
+        </p>
+      </div>
+
+      {/* ── Layout ── */}
+      <div className="ac-layout">
+
+        {/* Left — Offers */}
+        <div className="ac-col ac-col--left">
+          <div className="ac-col-label">
+            <span className="ac-col-dot" style={{ background: '#0057FF' }} />
+            Offres Foncières
+          </div>
+          {OFFERS.map((o, i) => <OfferCard key={o.id} offer={o} delay={i * 160} />)}
+        </div>
+
+        {/* Center — Gallery */}
+        <div className="ac-col ac-col--center">
+          <div className="ac-col-label">
+            <span className="ac-col-dot" style={{ background: '#FF3A00' }} />
+            Galerie Projets
+          </div>
+          <div className="ac-masonry">
+            {IMAGES.map((img, i) => (
+              <MasonryItem key={i} img={img} delay={i * 70} />
+            ))}
+          </div>
+        </div>
+
+        {/* Right — Contact */}
+        <div className="ac-col ac-col--right">
+          <div className="ac-col-label">
+            <span className="ac-col-dot" style={{ background: '#FF3A00' }} />
+            Contact Rapide
+          </div>
+          <ContactCard />
+          <div className="ac-side-stats">
+            <StatPill number="+15" label="Ans d'expérience" delay={400} color="#0057FF" />
+            <StatPill number="+250" label="Biens gérés" delay={520} color="#00B86B" />
+          </div>
+        </div>
+
+      </div>
+    </section>
   );
 }
