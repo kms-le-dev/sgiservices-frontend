@@ -64,13 +64,23 @@
 .table{ min-width:720px; }
 .table{ width:100%; border-collapse: collapse; background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(2,6,23,0.06) }
 .table thead{ background: linear-gradient(90deg, var(--red), var(--green)); color: var(--white) }
-.table thead th{ padding: 12px 14px; text-align:left; font-weight:700 }
+.table thead th{ padding: 12px 14px; text-align:left; font-weight:700; color: #fff; background: #111827; letter-spacing: 0.5px; }
 .table tbody tr{ border-bottom: 1px solid #f3f4f6 }
-.table tbody tr:nth-child(even){ background: #fbfbfb }
+.table tbody tr:nth-child(even){ background: #f3f4f6 }
 .th, .td{ padding: 12px 14px; }
+.td, .th {
+  color: #111827 !important;
+  font-weight: 600;
+  background: #fff;
+}
 
 /* Users table smaller cells */
 .users-table .th, .users-table .td{ padding: 10px 12px }
+.users-table .th, .users-table .td {
+  color: #0f172a !important;
+  font-weight: 700;
+  background: #fff;
+}
 
 /* Improve table layout on small screens */
 @media (max-width: 768px) {
@@ -95,14 +105,25 @@
 .admin-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.06) }
 .item-row{ display:flex; justify-content:space-between; align-items:flex-start }
 .item-title{ font-weight:700; color: #0f172a }
-.item-desc{ color: var(--muted); margin-top:6px }
+.item-desc{ color: #222; margin-top:6px; font-weight: 500; }
 
 .admin-thumb{ margin-top:8px; width:160px; height:100px; object-fit:cover; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.06) }
 
 .preview-thumb { width:120px; height:80px; object-fit:cover; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.06); margin-left:10px }
 
 .view-title{ font-size:20px; margin-bottom:14px; font-weight:700 }
+.view-title {
+  color: #dc2626;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
 .section-subtitle{ font-size:16px; margin-bottom:12px; font-weight:600 }
+.section-subtitle {
+  color: #16a34a;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
 
 /* Buttons */
 .btn-cta{ background: var(--green); color: var(--white); padding:8px 12px; border-radius:8px; border:none; cursor:pointer }

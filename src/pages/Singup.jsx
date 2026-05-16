@@ -86,11 +86,41 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup-container">
+    <div className="signup-container responsive-login-layout">
+      {/* Vidéo gauche (desktop) ou haut (mobile) */}
+      <div className="login-video-col left responsive-video1">
+        <video
+          src="/video1.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: '440px', maxWidth: '40vw', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.13)' }}
+          tabIndex={-1}
+          disablePictureInPicture
+          controls={false}
+        />
+      </div>
+
       <div className="signup-card">
+        {/* Vidéo 1 (mobile only, haut du formulaire) */}
+        <div className="login-video-mobile mobile-video1">
+          <video
+            src="/video1.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', maxWidth: '100%', borderRadius: '12px', marginBottom: '18px', boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
+            tabIndex={-1}
+            disablePictureInPicture
+            controls={false}
+          />
+        </div>
+
         <div className="signup-header">
           <h2>Inscription</h2>
-          <p>Créez votre compte SGI Services</p>
+          <p>Créez votre compte SIP-CI</p>
         </div>
 
         <div className="signup-form">
@@ -228,6 +258,36 @@ export default function Signup() {
         <div className="signup-footer">
           <p>Vous avez déjà un compte ? <Link to="/login" className="login-link">Se connecter</Link> </p>
         </div>
+
+        {/* Vidéo 2 (mobile only, bas du formulaire) */}
+        <div className="login-video-mobile mobile-video2">
+          <video
+            src="/video2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', maxWidth: '100%', borderRadius: '12px', marginTop: '18px', boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
+            tabIndex={-1}
+            disablePictureInPicture
+            controls={false}
+          />
+        </div>
+      </div>
+
+      {/* Vidéo droite (desktop) */}
+      <div className="login-video-col right responsive-video2">
+        <video
+          src="/video2.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: '440px', maxWidth: '40vw', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.13)' }}
+          tabIndex={-1}
+          disablePictureInPicture
+          controls={false}
+        />
       </div>
     </div>
   );

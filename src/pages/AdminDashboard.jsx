@@ -39,7 +39,7 @@ function UsersView() {
     api
       .get("/users")
       .then((res) => setUsers(res.data))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }
 
   function startEdit(u) {
@@ -73,7 +73,7 @@ function UsersView() {
         cancelEdit();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setErrorMsg(err?.response?.data?.message || 'Erreur lors de la sauvegarde');
       })
       .finally(() => {
@@ -86,7 +86,7 @@ function UsersView() {
     api
       .delete(`/users/${id}`)
       .then(() => fetchUsers())
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }
 
   return (
@@ -203,7 +203,7 @@ function ItemsListView({ type, endpoint, categories }) {
     api
       .get(endpoint)
       .then((res) => setItems(res.data))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }
 
   function handleFileChange(e) {
@@ -250,11 +250,10 @@ function ItemsListView({ type, endpoint, categories }) {
       for (const pair of fd.entries()) {
         // File objects will show as File in console
         // eslint-disable-next-line no-console
-        console.log('FormData entry:', pair[0], pair[1]);
+        // console.log('FormData entry:', pair[0], pair[1]);
       }
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.warn('Could not enumerate FormData entries', err);
+      // console.warn('Could not enumerate FormData entries', err);
     }
 
     api
@@ -270,7 +269,7 @@ function ItemsListView({ type, endpoint, categories }) {
         setPreviewIsObject(false);
       })
       .catch((err) => {
-        console.error('Publish error', err);
+        // console.error('Publish error', err);
         // extract Laravel validation errors if present
         const resp = err?.response?.data;
         if (resp && resp.errors) {
@@ -304,11 +303,10 @@ function ItemsListView({ type, endpoint, categories }) {
     try {
       for (const pair of fd.entries()) {
         // eslint-disable-next-line no-console
-        console.log('Edit FormData entry:', pair[0], pair[1]);
+        // console.log('Edit FormData entry:', pair[0], pair[1]);
       }
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.warn('Could not enumerate FormData entries', err);
+      // console.warn('Could not enumerate FormData entries', err);
     }
 
     api
@@ -324,7 +322,7 @@ function ItemsListView({ type, endpoint, categories }) {
         setPreviewIsObject(false);
       })
       .catch((err) => {
-        console.error('Save edit error', err);
+        // console.error('Save edit error', err);
         const resp = err?.response?.data;
         if (resp && resp.errors) {
           const msgs = Object.values(resp.errors).flat().join(' ');
@@ -340,7 +338,7 @@ function ItemsListView({ type, endpoint, categories }) {
     api
       .delete(`${endpoint}/` + id)
       .then(() => fetchItems())
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }
 
   return (
@@ -411,10 +409,20 @@ function ItemsListView({ type, endpoint, categories }) {
                     <div className="item-title">{it.title}</div>
                     <div className="item-desc">{it.description}</div>
                     {it.category && <div className="item-desc">Catégorie: {it.category}</div>}
-                    {/* show thumbnail if available (service.image, blog.featured_image, media.url) */}
-                    {(it.image || it.featured_image || it.url) && (
+                    {/* Affichage image selon le type */}
+                    {type === 'Blog' && it.featured_image && (
                       <div style={{marginTop:8}}>
-                        <img src={it.image || it.featured_image || it.url} alt={it.title} className="admin-thumb" />
+                        <img src={it.featured_image} alt={it.title} className="admin-thumb" />
+                      </div>
+                    )}
+                    {type === 'Galerie' && it.url && (
+                      <div style={{marginTop:8}}>
+                        <img src={it.url} alt={it.title} className="admin-thumb" />
+                      </div>
+                    )}
+                    {type === 'Services' && it.image && (
+                      <div style={{marginTop:8}}>
+                        <img src={it.image} alt={it.title} className="admin-thumb" />
                       </div>
                     )}
                   </div>

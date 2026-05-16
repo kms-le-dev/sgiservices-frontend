@@ -87,7 +87,7 @@ export default function Home() {
       </section>
       <section className="fade-in"><Carousel/></section><br/>
       <section className="fade-in"><Activite/></section>
-      <section className="fade-in"><NosServices/></section>
+      <section><NosServices/></section>
 
     </div>
   );

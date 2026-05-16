@@ -1,3 +1,52 @@
+/* Responsive layout pour vidéos autour du formulaire */
+.responsive-login-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.responsive-video1, .responsive-video2 {
+  display: flex;
+}
+.login-video-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .responsive-login-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .responsive-video1, .responsive-video2 {
+    display: none !important;
+  }
+  .login-video-mobile {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .login-card {
+    max-width: 100%;
+    margin: 0 0 0 0;
+  }
+}
+/* Colonnes vidéos autour du formulaire */
+.login-video-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1vw;
+}
+.login-video-col video {
+  display: block;
+  max-height: 340px;
+  background: #000;
+}
+
+@media (max-width: 900px) {
+  .login-video-col {
+    display: none;
+  }
+}
 /* Conteneur principal */
 .login-container {
   min-height: 100vh;

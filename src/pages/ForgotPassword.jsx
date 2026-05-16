@@ -74,54 +74,114 @@ export default function ForgotPassword() {
     <>
       <Header />
       <main>
-        <div className="signup-container">
+        <div className="signup-container responsive-login-layout">
+          {/* Vidéo gauche (desktop) ou haut (mobile) */}
+          <div className="login-video-col left responsive-video1">
+            <video
+              src="/video1.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: '440px', maxWidth: '40vw', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.13)' }}
+              tabIndex={-1}
+              disablePictureInPicture
+              controls={false}
+            />
+          </div>
+
           <div className="signup-card">
+            {/* Vidéo 1 (mobile only, haut du formulaire) */}
+            <div className="login-video-mobile mobile-video1">
+              <video
+                src="/video1.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: '100%', maxWidth: '100%', borderRadius: '12px', marginBottom: '18px', boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
+                tabIndex={-1}
+                disablePictureInPicture
+                controls={false}
+              />
+            </div>
+
             <h2>Réinitialiser le mot de passe</h2>
             <p>Remplissez les informations pour modifier votre mot de passe</p>
 
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
+            {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
 
-        <form onSubmit={handleSubmit} className="signup-form">
-          <div className="form-row">
-            <div className="form-group">
-              <label>Nom</label>
-              <input name="nom" value={form.nom} onChange={onChange} />
+            <form onSubmit={handleSubmit} className="signup-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Nom</label>
+                  <input name="nom" value={form.nom} onChange={onChange} />
+                </div>
+                <div className="form-group">
+                  <label>Prénom</label>
+                  <input name="prenom" value={form.prenom} onChange={onChange} />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Email</label>
+                <input name="email" value={form.email} onChange={onChange} type="email" />
+              </div>
+
+              <div className="form-group">
+                <label>Numéro de téléphone</label>
+                <input name="phone" value={form.phone} onChange={onChange} />
+              </div>
+
+              <div className="form-group">
+                <label>Date de naissance</label>
+                <input name="dob" value={form.dob} onChange={onChange} type="date" />
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label> Nouveau mot de passe</label>
+                  <input name="password" value={form.password} onChange={onChange} type="password" />
+                </div>
+                <div className="form-group">
+                  <label> Confirmer le nouveau mot de passe</label>
+                  <input name="confirmPassword" value={form.confirmPassword} onChange={onChange} type="password" />
+                </div>
+              </div>
+ 
+              <button type="submit" className="submit-btn" disabled={loading}>{loading ? 'Modification...' : 'Modifier le mot de passe'}</button>
+            </form>
+
+            {/* Vidéo 2 (mobile only, bas du formulaire) */}
+            <div className="login-video-mobile mobile-video2">
+              <video
+                src="/video2.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: '100%', maxWidth: '100%', borderRadius: '12px', marginTop: '18px', boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
+                tabIndex={-1}
+                disablePictureInPicture
+                controls={false}
+              />
             </div>
-            <div className="form-group">
-              <label>Prénom</label>
-              <input name="prenom" value={form.prenom} onChange={onChange} />
-            </div>
           </div>
 
-          <div className="form-group">
-            <label>Email</label>
-            <input name="email" value={form.email} onChange={onChange} type="email" />
-          </div>
-
-          <div className="form-group">
-            <label>Numéro de téléphone</label>
-            <input name="phone" value={form.phone} onChange={onChange} />
-          </div>
-
-          <div className="form-group">
-            <label>Date de naissance</label>
-            <input name="dob" value={form.dob} onChange={onChange} type="date" />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label> Nouveau mot de passe</label>
-              <input name="password" value={form.password} onChange={onChange} type="password" />
-            </div>
-            <div className="form-group">
-              <label> Confirmer le nouveau mot de passe</label>
-              <input name="confirmPassword" value={form.confirmPassword} onChange={onChange} type="password" />
-            </div>
-          </div>
-
-          <button type="submit" className="submit-btn" disabled={loading}>{loading ? 'Modification...' : 'Modifier le mot de passe'}</button>
-        </form>
+          {/* Vidéo droite (desktop) */}
+          <div className="login-video-col right responsive-video2">
+            <video
+              src="/video2.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: '440px', maxWidth: '40vw', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.13)' }}
+              tabIndex={-1}
+              disablePictureInPicture
+              controls={false}
+            />
           </div>
         </div>
       </main>

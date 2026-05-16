@@ -33,8 +33,11 @@ export default function Gallery() {
 
   useEffect(() => {
     api.get("/media")
-      .then(res => setMedia(res.data))
-      .catch(err => console.log(err));
+      .then(res => {
+        const data = Array.isArray(res.data) ? res.data : [];
+        setMedia(data);
+      })
+      .catch(() => setMedia([]));
   }, []);
 
   return (

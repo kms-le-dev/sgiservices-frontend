@@ -32,8 +32,11 @@ export default function Blog() {
 
   useEffect(() => {
     api.get("/blogs")
-      .then(res => setPosts(res.data))
-      .catch(err => console.log(err));
+      .then(res => {
+        const data = Array.isArray(res.data) ? res.data : [];
+        setPosts(data);
+      })
+      .catch(() => setPosts([]));
   }, []);
 
   return (

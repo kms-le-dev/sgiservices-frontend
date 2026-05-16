@@ -104,11 +104,11 @@ export default function Services() {
     api.get('/services')
       .then((res) => {
         if (!mounted) return;
-        const data = res.data || [];
-        setServices(data.length ? data : STATIC_SERVICES);
+        const data = Array.isArray(res.data) ? res.data : [];
+        setServices(data);
       })
       .catch(() => {
-        setServices(STATIC_SERVICES);
+        setServices([]);
       });
     return () => { mounted = false; };
   }, []);
@@ -160,13 +160,6 @@ export default function Services() {
       if (category === 'BTP & Immobilier') return s.category === 'BTP & Immobilier' || s.category === 'Immobilier';
       return s.category === category;
     });
-    // Si aucun service dynamique, fallback statique
-    if (!items.length) {
-      items = STATIC_SERVICES.filter((s) => {
-        if (category === 'BTP & Immobilier') return s.category === 'BTP & Immobilier' || s.category === 'Immobilier';
-        return s.category === category;
-      });
-    }
     return {
       title: category,
       description: `${items.length} offre(s) disponible(s) dans ${category}.`,
@@ -213,7 +206,7 @@ export default function Services() {
               <div style={{ marginTop: '2rem' }}>
                 <ServiceDetails
                   service={buildServiceGroup(categories[activeIndex])}
-                  whatsappNumber=":+2250759890358"
+                  whatsappNumber=":+2250585786229"
                 />
               </div>
             </>
@@ -224,7 +217,7 @@ export default function Services() {
               <div style={{ marginTop: '2rem' }}>
                 <ServiceDetails
                   service={buildServiceGroup(categories[activeIndex])}
-                  whatsappNumber=":+2250759890358"
+                  whatsappNumber=":+2250585786229"
                 />
               </div>
             </>
@@ -246,7 +239,7 @@ export default function Services() {
                 >
                   <ServiceDetails
                     service={buildServiceGroup(categories[activeIndex])}
-                    whatsappNumber=":+2250759890358"
+                    whatsappNumber=":+2250585786229"
                     grid3={true}
                   />
                 </div>
@@ -255,7 +248,7 @@ export default function Services() {
           ) : (
             <ServiceDetails
               service={buildServiceGroup(categories[activeIndex])}
-              whatsappNumber=":+2250759890358"
+              whatsappNumber=":+2250585786229"
             />
           )
         )}

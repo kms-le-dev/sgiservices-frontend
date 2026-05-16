@@ -151,10 +151,10 @@ function ContactCard() {
       <div className="ac-contact-divider" />
       <div className="ac-contact-lines">
         {[
-          { icon: 'phone', text: '+225 07 59 89 03 58' },
-          { icon: 'web', text: 'sgiservices.com' },
+          { icon: 'phone', text: '+225 07 04 95 95 42' },
+          { icon: 'web', text: 'sipdg0047@gmail.com' },
           { icon: 'pin', text: 'Abidjan, Côte d\'Ivoire' },
-          { icon: 'phone', text: '05 74 93 97 37' },
+          { icon: 'phone', text: '+225 05 84 78 62 29' },
         ].map(({ icon, text }, i) => (
           <div className="ac-contact-line" key={i}>
             <span className="ac-line-icon">

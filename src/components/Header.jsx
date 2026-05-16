@@ -1,18 +1,40 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import './Header.css';
 import { api } from "../services/api";
 import auth from "../services/auth";
 import logo from "../assets/logo.jpeg";
 
+
 export default function Header() {
   const [user, setUser] = useState(null);
   const [showLogoutToast, setShowLogoutToast] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    setUser(auth.getCurrentUser());
+    const token = localStorage.getItem('token');
+    // console.log('Token trouvé:', token);
+    if (token) {
+      api.get('/user')
+        .then(res => {
+          // console.log('Réponse /user:', res.data);
+          if (res.data) {
+            auth.saveUser(res.data);
+            setUser(res.data);
+          }
+        })
+        .catch((err) => {
+          // console.error('Erreur /user:', err); 
+          auth.clearAuth();
+          auth.clearUser();
+          setUser(null);
+        });
+    } else {
+      setUser(null);
+    }
+
     // optional: listen to storage changes in other tabs
     const onStorage = (e) => {
       if (e.key === 'user' || e.key === 'token') {
@@ -21,7 +43,7 @@ export default function Header() {
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
-  }, []);
+  }, [location.pathname]);
 
   const handleLogout = async () => {
     // afficher le message immédiatement
@@ -36,7 +58,7 @@ export default function Header() {
     try {
       await api.post('/auth/logout');
     } catch (err) {
-      console.error('Logout error', err);
+      // console.error('Logout error', err);
     }
 
     // laisser le toast visible un court instant puis rediriger
@@ -60,7 +82,7 @@ export default function Header() {
         <h1 className="site-title">
           <span className="title-white">S I P</span>
           <span className="title-red"> C I</span>
-          <span className="title-white"> . C O M</span>
+          <span className="title-white"> . O R G</span>
         </h1>
 
         <nav className="nav-links">

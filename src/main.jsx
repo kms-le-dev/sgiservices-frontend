@@ -15,7 +15,7 @@ if (emailjsPublicKey) {
   try {
     emailjs.init(emailjsPublicKey);
     // eslint-disable-next-line no-console
-    console.log('EmailJS initialisé');
+    // console.log('EmailJS initialisé');
   } catch (err) {
     // eslint-disable-next-line no-console
     console.warn('Impossible d\'initialiser EmailJS:', err);

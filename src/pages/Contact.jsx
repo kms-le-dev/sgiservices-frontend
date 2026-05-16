@@ -112,13 +112,13 @@ export default function Contact() {
             <div className="info-card">
               <div className="info-icon">📞</div>
               <h3>Téléphone</h3>
-              <p>+2250759890358</p>
+              <p>+225 07 04 95 95 42</p>
             </div>
 
             <div className="info-card">
               <div className="info-icon">✉️</div>
               <h3>Email</h3>
-              <p>sgiservices2015@gmail.com</p>
+              <p>email@sipci.org</p>
             </div>
 
             <div className="info-card">

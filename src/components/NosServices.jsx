@@ -1,97 +1,82 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./NosServices.css";
+import { Link } from "react-router-dom";
 
-/* ════════════════════════════════════════
-   DATA
-════════════════════════════════════════ */
 const activities = [
-  { label: "Immobilier",      sub: "Achat · Vente · Location",          color: "green",  num: "01" },
-  { label: "BTP",             sub: "Construction & Rénovation",          color: "red",    num: "02" },
-  { label: "Tertiaire",       sub: "Services aux entreprises",           color: "black",  num: "03" },
-  { label: "Imprimerie",      sub: "Offset · Numérique · Grand format",  color: "red",    num: "04" },
-  { label: "Agro-Pastoral",   sub: "Élevage & Agriculture",              color: "green",  num: "05" },
-  { label: "Agro-Industriel", sub: "Transformation & Production",        color: "black",  num: "06" },
-  { label: "Import-Export",   sub: "Commerce international",             color: "green",  num: "07" },
+  { label: "Immobilier",      sub: "Achat · Vente · Location",         color: "green", num: "01" },
+  { label: "BTP",             sub: "Construction & Rénovation",         color: "red",   num: "02" },
+  { label: "Tertiaire",       sub: "Services aux entreprises",          color: "black", num: "03" },
+  { label: "Imprimerie",      sub: "Offset · Numérique · Grand format", color: "red",   num: "04" },
+  { label: "Agro-Pastoral",   sub: "Élevage & Agriculture",             color: "green", num: "05" },
+  { label: "Agro-Industriel", sub: "Transformation & Production",       color: "black", num: "06" },
+  { label: "Import-Export",   sub: "Commerce international",            color: "green", num: "07" },
 ];
 
 const operations = [
-  {
-    short: "Acquisition & Cession",
-    color: "green",
-    text: "L'acquisition, la location et la vente de tous biens meubles et immeubles.",
-  },
-  {
-    short: "Financement",
-    color: "red",
-    text: "L'emprunt de toutes sommes auprès de tous établissements financiers avec possibilité de donner en garantie tout ou partie des biens sociaux.",
-  },
-  {
-    short: "Gestion de Fonds",
-    color: "black",
-    text: "La prise en gérance de tous fonds de commerce.",
-  },
-  {
-    short: "Participations",
-    color: "green",
-    text: "La prise de participation dans toute société existante ou devant être créée.",
-  },
-  {
-    short: "Développement",
-    color: "red",
-    text: "Toute opération financière, commerciale, industrielle, mobilière et immobilière, se rapportant directement ou indirectement à l'objet social ou pouvant en faciliter l'extension ou le développement.",
-  },
+  { short: "Acquisition & Cession", color: "green", text: "L'acquisition, la location et la vente de tous biens meubles et immeubles." },
+  { short: "Financement",           color: "red",   text: "L'emprunt de toutes sommes auprès de tous établissements financiers avec possibilité de donner en garantie tout ou partie des biens sociaux." },
+  { short: "Gestion de Fonds",      color: "black", text: "La prise en gérance de tous fonds de commerce." },
+  { short: "Participations",        color: "green", text: "La prise de participation dans toute société existante ou devant être créée." },
+  { short: "Développement",         color: "red",   text: "Toute opération financière, commerciale, industrielle, mobilière et immobilière." },
 ];
 
-/* ════════════════════════════════════════
-   HOOKS
-════════════════════════════════════════ */
+const PARTICLES = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}%`,
+  duration: `${10 + Math.random() * 20}s`,
+  delay: `${Math.random() * 5}s`,
+}));
+
+/* ── useReveal ── */
 function useReveal(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
+    let isMobile = false;
+    try {
+      isMobile = window.matchMedia(
+        "(max-width: 900px), (hover: none), (pointer: coarse)"
+      ).matches;
+    } catch (e) {
+      isMobile = window.innerWidth <= 900;
+    }
+
+    if (isMobile || !("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setVisible(true); obs.disconnect(); }
-    }, { threshold });
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold }
+    );
+
     obs.observe(el);
     return () => obs.disconnect();
-  }, [threshold]);
+  }, []);
+
   return [ref, visible];
-}
+}  // ← accolade fermante de useReveal
 
-/* Typewriter for a single string */
-function useTypewriter(text, started, speed = 38) {
-  const [displayed, setDisplayed] = useState("");
-  useEffect(() => {
-    if (!started) return;
-    setDisplayed("");
-    let i = 0;
-    const id = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
-    }, speed);
-    return () => clearInterval(id);
-  }, [started, text, speed]);
-  return displayed;
-}
-
-/* ════════════════════════════════════════
-   SUB-COMPONENTS
-════════════════════════════════════════ */
-
-/* Animated split title — each word slides in individually */
-function SplitTitle({ text, className, colorMap = {} }) {
+/* ── SplitTitle ── */
+function SplitTitle({ text, colorMap = {} }) {
   const [ref, visible] = useReveal(0.2);
-  const words = text.split(" ");
   return (
-    <span ref={ref} className={`split-title ${className || ""}`} aria-label={text}>
-      {words.map((word, i) => (
-        <span key={i} className="split-word-wrap">
+    <span ref={ref} className="split-title">
+      {text.split(" ").map((word, i) => (
+        <span className="split-word-wrap" key={i}>
           <span
             className={`split-word ${visible ? "split-word--in" : ""} ${colorMap[word] || ""}`}
-            style={{ transitionDelay: `${i * 80}ms` }}
+            style={{ transitionDelay: `${i * 100}ms` }}
           >
             {word}
           </span>
@@ -101,251 +86,177 @@ function SplitTitle({ text, className, colorMap = {} }) {
   );
 }
 
-/* Animated number counter */
-function Counter({ target, suffix = "", started }) {
-  const [val, setVal] = useState(0);
+/* ── Counter ── */
+function Counter({ target, started }) {
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     if (!started) return;
-    const dur = 1600;
-    const start = performance.now();
-    const tick = (now) => {
-      const p = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(Math.round(eased * target));
-      if (p < 1) requestAnimationFrame(tick);
+    const duration = 1800;
+    const now = () => typeof performance !== "undefined" ? performance.now() : Date.now();
+    const startTime = now();
+    let rafId;
+    const animate = () => {
+      const progress = Math.min((now() - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) rafId = requestAnimationFrame(animate);
     };
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
   }, [started, target]);
-  return <>{val}{suffix}</>;
+
+  return count;
 }
 
-/* Activity card */
+/* ── ActivityCard ── */
 function ActivityCard({ item, index }) {
-  const [ref, visible] = useReveal(0.05);
-  const [hovered, setHovered] = useState(false);
-  // Mapping activité -> id d'ancre du bouton correspondant dans Services
-  let anchor = "#";
-  switch (item.label) {
-    case "Immobilier":
-    case "BTP":
-      anchor = "/services#btn-btp-immobilier";
-      break;
-    case "Tertiaire":
-    case "Agro-Industriel":
-    case "Agro-Pastoral":
-      anchor = "/services#btn-divers";
-      break;
-    case "Imprimerie":
-      anchor = "/services#btn-imprimerie";
-      break;
-    case "Import-Export":
-      anchor = "/services#btn-import-export";
-      break;
-    default:
-      anchor = `/services#btn-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-  }
+  const [ref, visible] = useReveal(0.1);
   return (
-    <a
-      href={anchor}
+    <Link
+      to="/services"
       ref={ref}
-      className={`ns-act-card ns-act-card--${item.color} ${visible ? "ns-reveal" : ""}`}
-      style={{ "--delay": `${index * 75}ms`, textDecoration: 'none', cursor: 'pointer' }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={`ns-card ns-card--${item.color} ${visible ? "ns-reveal" : ""}`}
+      style={{ transitionDelay: `${index * 80}ms`, textDecoration: "none", color: "inherit", cursor: "pointer" }}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const rotateX = -(e.clientY - rect.top - rect.height / 2) / 16;
+        const rotateY = (e.clientX - rect.left - rect.width / 2) / 16;
+        e.currentTarget.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}
     >
-      {/* Color accent bar left */}
-      <div className="ns-act-accent" />
-
-      {/* Number */}
-      <span className="ns-act-num">{item.num}</span>
-
-      {/* Body */}
-      <div className="ns-act-body">
-        <div className="ns-act-label">{item.label}</div>
-        <div className="ns-act-sub">{item.sub}</div>
+      <div className="ns-card-glow" />
+      <div className="ns-card-number">{item.num}</div>
+      <div className="ns-card-content">
+        <h3>{item.label}</h3>
+        <p>{item.sub}</p>
       </div>
-
-      {/* Arrow */}
-      <svg
-        className={`ns-act-arrow ${hovered ? "ns-act-arrow--show" : ""}`}
-        width="16" height="16" viewBox="0 0 16 16" fill="none"
-      >
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </a>
+      <div className="ns-arrow">→</div>
+    </Link>
   );
 }
 
-/* Operation row with typewriter on hover */
+/* ── OperationRow ── */
 function OperationRow({ op, index }) {
   const [ref, visible] = useReveal(0.08);
-  const [hovered, setHovered] = useState(false);
-  const typed = useTypewriter(op.text, hovered, 22);
-
   return (
     <div
       ref={ref}
-      className={`ns-op-row ns-op-row--${op.color} ${visible ? "ns-reveal" : ""}`}
-      style={{ "--delay": `${index * 100}ms` }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={`ns-operation ns-operation--${op.color} ${visible ? "ns-reveal" : ""}`}
+      style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="ns-op-left">
-        <div className="ns-op-index">{String(index + 1).padStart(2, "0")}</div>
-        <div className="ns-op-color-bar" />
+      <div className="ns-operation-left">
+        <span>{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <div className="ns-op-body">
-        <div className="ns-op-short">{op.short}</div>
-        <p className="ns-op-text">
-          {hovered ? typed : op.text}
-          {hovered && typed.length < op.text.length && (
-            <span className="ns-cursor">|</span>
-          )}
-        </p>
+      <div className="ns-operation-content">
+        <h4>{op.short}</h4>
+        <p>{op.text}</p>
       </div>
     </div>
   );
 }
 
-/* ════════════════════════════════════════
-   MAIN COMPONENT
-════════════════════════════════════════ */
+/* ── NosServices ── */
 export default function NosServices() {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [headerRef, headerVisible] = useReveal(0.15);
-  const [statsRef, statsVisible]   = useReveal(0.3);
+  const [statsRef, statsVisible] = useReveal(0.2);
+
+  useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) return;
+    const move = (e) => setMouse({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
 
   return (
-    <div className="ns-root">
+    <div className="ns-root" style={{ minHeight: "100vh", background: "var(--bg)", opacity: 1, visibility: "visible" }}>
 
-      {/* Watermark */}
-      <div className="ns-watermark" aria-hidden="true">SIP-CI</div>
+      <div className="ns-mouse-glow" style={{ left: mouse.x, top: mouse.y }} />
 
-      {/* ── TOP COLOR BAR ── */}
-      <div className="ns-top-bar">
-        <div className="ns-top-bar__green" />
-        <div className="ns-top-bar__white" />
-        <div className="ns-top-bar__red" />
-      </div>
-
-      {/* ── HEADER ── */}
-      <header
-        ref={headerRef}
-        className={`ns-header ${headerVisible ? "ns-reveal" : ""}`}
-        style={{ "--delay": "0ms" }}
-      >
-        <div className="ns-eyebrow">
-          <span className="ns-eyebrow__dash ns-eyebrow__dash--green" />
-          <span className="ns-eyebrow__text">Objet social &amp; Établissements</span>
-          <span className="ns-eyebrow__dash ns-eyebrow__dash--red" />
-        </div>
-
-        <h1 className="ns-main-title">
-          <SplitTitle
-            text="Renseignements Relatifs"
-            colorMap={{ Relatifs: "ns-word--red" }}
-          />
-          <br />
-          <SplitTitle
-            text="à SIP CI"
-            colorMap={{ SIP: "ns-word--green", CI: "ns-word--black" }}
-          />
-        </h1>
-
-        <p className="ns-header-desc">
-          Société Internationale Plurisectorielle de{" "}
-          <strong className="ns-hl--green">Côte d'Ivoire</strong> —
-          une structure multisectorielle au service du{" "}
-          <strong className="ns-hl--red">développement économique</strong> ivoirien.
-        </p>
-
-        <div className="ns-header-badge">
-          <span className="ns-badge-dot" />
-          Statut : <strong>En vigueur</strong>
-        </div>
-      </header>
-
-      {/* ── STATS ROW ── */}
-      <div ref={statsRef} className="ns-stats-row">
-        {[
-          { n: 7,  suf: "",  label: "Domaines d'activité", color: "green" },
-          { n: 15, suf: "+", label: "Ans d'expérience",    color: "red"   },
-          { n: 5,  suf: "",  label: "Opérations sociales", color: "black" },
-        ].map((s, i) => (
-          <div key={i} className={`ns-stat ns-stat--${s.color} ${statsVisible ? "ns-reveal" : ""}`}
-            style={{ "--delay": `${i * 140}ms` }}>
-            <div className="ns-stat__num">
-              <Counter target={s.n} suffix={s.suf} started={statsVisible} />
-            </div>
-            <div className="ns-stat__label">{s.label}</div>
-          </div>
+      <div className="ns-particles">
+        {PARTICLES.map((p) => (
+          <span key={p.id} style={{ left: p.left, animationDuration: p.duration, animationDelay: p.delay }} />
         ))}
       </div>
 
-      {/* ── RULE ── */}
-      <div className="ns-rule" role="separator">
-        <span className="ns-rule__line" />
-        <span className="ns-rule__trio">
-          <span className="ns-rule__dot ns-rule__dot--green" />
-          <span className="ns-rule__dot ns-rule__dot--white" />
-          <span className="ns-rule__dot ns-rule__dot--red" />
-        </span>
-        <span className="ns-rule__line" />
+      <div className="ns-top-bar">
+        <div className="green" />
+        <div className="white" />
+        <div className="red" />
       </div>
 
-      {/* ── ACTIVITIES ── */}
-      <section className="ns-section">
-        <div className="ns-section-header ns-reveal" style={{ "--delay": "0ms" }}>
-          <h2 className="ns-section-title">
-            Activités <span className="ns-word--green">Exercées</span>
-          </h2>
-          <span className="ns-section-count">{activities.length} domaines</span>
+      <header ref={headerRef} className={`ns-header ${headerVisible ? "ns-reveal" : ""}`}>
+        <div className="ns-badge">
+          <span />
+          Société Internationale Plurisectorielle
         </div>
+        <div className="ns-title-imgs">
+          <img src="/btp1.png" alt="BTP gauche" className="ns-title-img ns-title-img--left" onError={(e) => { e.currentTarget.style.display = "none"; }} />
+          <h1 className="ns-title">
+            <SplitTitle text="Renseignements Relatifs" colorMap={{ Relatifs: "red-text" }} />
+            <br />
+            <SplitTitle text="à SIP CI" colorMap={{ SIP: "green-text", CI: "black-text" }} />
+          </h1>
+          <img src="/btp2.png" alt="BTP droite" className="ns-title-img ns-title-img--right" onError={(e) => { e.currentTarget.style.display = "none"; }} />
+        </div>
+        <p className="ns-description">
+          Société internationale spécialisée dans plusieurs secteurs
+          d'activités stratégiques contribuant au développement économique
+          et industriel de la Côte d'Ivoire.
+        </p>
+      </header>
 
-        <div className="ns-act-grid">
-          {activities.map((a, i) => (
-            <ActivityCard key={a.label} item={a} index={i} />
+      <section ref={statsRef} className="ns-stats">
+        {[
+          { num: 7,  label: "Domaines",         color: "green" },
+          { num: 15, label: "Ans d'expérience", color: "red"   },
+          { num: 5,  label: "Opérations",        color: "black" },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className={`ns-stat ns-stat--${item.color} ${statsVisible ? "ns-reveal" : ""}`}
+            style={{ transitionDelay: `${i * 120}ms` }}
+          >
+            <h2><Counter target={item.num} started={statsVisible} /></h2>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="ns-section">
+        <div className="ns-section-top">
+          <h2>Activités <span>Exercées</span></h2>
+          <div className="line" />
+        </div>
+        <div className="ns-grid">
+          {activities.map((item, index) => (
+            <ActivityCard key={item.label} item={item} index={index} />
           ))}
         </div>
       </section>
 
-      {/* ── OPERATIONS ── */}
       <section className="ns-section">
-        <div className="ns-section-header">
-          <h2 className="ns-section-title">
-            Pour la <span className="ns-word--red">Réalisation</span> de l'Objet Social
-          </h2>
-          <span className="ns-section-count">{operations.length} opérations</span>
+        <div className="ns-section-top">
+          <h2>Opérations <span>Sociales</span></h2>
+          <div className="line" />
         </div>
-        <p className="ns-op-hint">Survolez une ligne pour l'animer ↓</p>
-        <div className="ns-op-list">
-          {operations.map((op, i) => (
-            <OperationRow key={i} op={op} index={i} />
+        <div className="ns-operations">
+          {operations.map((op, index) => (
+            <OperationRow key={index} op={op} index={index} />
           ))}
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
       <footer className="ns-footer">
-        <div className="ns-footer-left">
-          <span className="ns-footer-logo">
-            <em className="ns-word--green">SIP</em>
-            <em className="ns-word--red">‑</em>
-            <em className="ns-word--black">CI</em>
-          </span>
-          <span className="ns-footer-sub">Document Officiel · Objet Social</span>
-        </div>
-        <div className="ns-footer-right">
-          <span className="ns-status-dot" />
-          <span className="ns-status-text">En vigueur</span>
-        </div>
+        <h2>
+          <span className="green-text">SIP</span>
+          <span className="red-text">-</span>
+          <span className="black-text">CI</span>
+        </h2>
+        <p>Entreprise Multisectorielle</p>
       </footer>
-
-      {/* ── BOTTOM COLOR BAR ── */}
-      <div className="ns-top-bar ns-top-bar--bottom">
-        <div className="ns-top-bar__green" />
-        <div className="ns-top-bar__white" />
-        <div className="ns-top-bar__red" />
-      </div>
 
     </div>
   );
