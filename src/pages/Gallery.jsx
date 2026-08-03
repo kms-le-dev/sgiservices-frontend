@@ -72,7 +72,7 @@ export default function Gallery() {
             <button
               className="article-button"
               onClick={() => {
-                const phone = ':+2250759890358'.replace(/[^0-9+]/g, '');
+                const phone = ':+2250584786229'.replace(/[^0-9+]/g, '');
                 const titre = m.title || 'élément';
                 const desc = m.description || '';
                 const origin = typeof window !== 'undefined' ? window.location.origin : '';

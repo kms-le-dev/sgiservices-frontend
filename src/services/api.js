@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api",
+  // baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://sipci.org/api/",
   // Ne pas forcer `Content-Type` ici : laisser axios le définir automatiquement
   // (utile pour les envois `FormData` / fichiers)
 });

@@ -206,7 +206,7 @@ export default function Services() {
               <div style={{ marginTop: '2rem' }}>
                 <ServiceDetails
                   service={buildServiceGroup(categories[activeIndex])}
-                  whatsappNumber=":+2250585786229"
+                  whatsappNumber=":+2250584786229"
                 />
               </div>
             </>
@@ -217,7 +217,7 @@ export default function Services() {
               <div style={{ marginTop: '2rem' }}>
                 <ServiceDetails
                   service={buildServiceGroup(categories[activeIndex])}
-                  whatsappNumber=":+2250585786229"
+                  whatsappNumber=":+2250584786229"
                 />
               </div>
             </>
@@ -239,7 +239,7 @@ export default function Services() {
                 >
                   <ServiceDetails
                     service={buildServiceGroup(categories[activeIndex])}
-                    whatsappNumber=":+2250585786229"
+                    whatsappNumber=":+2250584786229"
                     grid3={true}
                   />
                 </div>
@@ -248,7 +248,7 @@ export default function Services() {
           ) : (
             <ServiceDetails
               service={buildServiceGroup(categories[activeIndex])}
-              whatsappNumber=":+2250585786229"
+              whatsappNumber=":+2250584786229"
             />
           )
         )}
